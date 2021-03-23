@@ -1,5 +1,4 @@
-*.zip
 .env
 .rsp
 .vagrant
-.vscode
+*.zip
