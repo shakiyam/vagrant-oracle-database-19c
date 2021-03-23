@@ -6,7 +6,7 @@ Vagrant + Oracle Linux 7 + Oracle Database 19c (19.3) シングル環境の簡�
 ダウンロード
 ------------
 
-Oracle Database 19c (19.3)のソフトウェアを[Oracle Technology Network](http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html)からダウンロードし、Vagrantfileと同じディレクトリに配置。
+Oracle Database 19c (19.3)のソフトウェアを[Oracle Database Software Downloads](https://www.oracle.com/database/technologies/oracle-database-software-downloads.html)からダウンロードし、Vagrantfileと同じディレクトリに配置。
 
 * LINUX.X64_193000_db_home.zip
 
@@ -107,4 +107,4 @@ Author
 License
 -------
 
-[MIT License](https://opensource.org/licenses/mit)
+[MIT License](https://opensource.org/licenses/MIT)
