@@ -1,4 +1,4 @@
 .env
-.rsp
 .vagrant
+*.rsp
 *.zip
