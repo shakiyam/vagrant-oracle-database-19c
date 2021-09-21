@@ -19,7 +19,7 @@ Oracle Database 19c (19.3)のソフトウェアを[Oracle Database Software Down
 ORACLE_BASE=/u01/app/oracle
 ORACLE_CHARACTERSET=AL32UTF8
 ORACLE_EDITION=EE
-ORACLE_HOME=/u01/app/oracle/product/19.0.0/dbhome_1
+ORACLE_HOME=/u01/app/oracle/product/19.3.0/dbhome_1
 ORACLE_PASSWORD=oracle
 ORACLE_PDB=pdb1
 ORACLE_SID=orcl
