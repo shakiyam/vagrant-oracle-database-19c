@@ -16,9 +16,11 @@ else
 fi
 set +a
 
-# Install Mo
-curl -sSL https://git.io/get-mo -o /usr/local/bin/mo
-chmod +x /usr/local/bin/mo
+readonly FILE="$SCRIPT_DIR/LINUX.X64_193000_db_home.zip"
+if [[ ! -f "$FILE" ]]; then
+  echo "$FILE not found"
+  exit 1
+fi
 
 # Install Oracle Preinstallation RPM
 yum -y install oracle-database-preinstall-19c
@@ -52,25 +54,27 @@ esac
 # Set oracle password
 echo oracle:"$ORACLE_PASSWORD" | chpasswd
 
-# Install database
-/usr/local/bin/mo "$SCRIPT_DIR"/db_install.rsp.mustache >"$SCRIPT_DIR"/db_install.rsp
-su - oracle -c "unzip -d $ORACLE_HOME $SCRIPT_DIR/LINUX.X64_193000_db_home.zip"
+TEMP_DIR=$(mktemp -d)
+readonly TEMP_DIR
+chmod 755 "$TEMP_DIR"
+
+# Install Mo (https://github.com/tests-always-included/mo)
+curl -sSL https://git.io/get-mo -o /usr/local/bin/mo
+chmod +x /usr/local/bin/mo
+
+# Install Oracle Database
+/usr/local/bin/mo "$SCRIPT_DIR"/db_install.rsp.mustache >"$TEMP_DIR"/db_install.rsp
+su - oracle -c "unzip -d $ORACLE_HOME $FILE"
 set +e +o pipefail
 su - oracle -c "cd $ORACLE_HOME && ./runInstaller -silent \
-  -ignorePrereq -waitforcompletion -responseFile $SCRIPT_DIR/db_install.rsp"
+  -ignorePrereq -waitforcompletion -responseFile $TEMP_DIR/db_install.rsp"
 set -e -o pipefail
 "$ORACLE_BASE"/../oraInventory/orainstRoot.sh
 "$ORACLE_HOME"/root.sh
 
-# Create listener using netca
+# Create a listener using netca
 su - oracle -c "netca -silent -responseFile $ORACLE_HOME/assistants/netca/netca.rsp"
 
-# Create database
-/usr/local/bin/mo "$SCRIPT_DIR"/dbca.rsp.mustache >"$SCRIPT_DIR"/dbca.rsp
-su - oracle -c "dbca -silent -createDatabase -responseFile $SCRIPT_DIR/dbca.rsp"
-
-# Shutdown database
-#echo "shutdown immediate" | su - oracle -c 'sqlplus "/ as sysdba"'
-
-# Stop listener
-#su - oracle -c "lsnrctl stop"
+# Create a database
+/usr/local/bin/mo "$SCRIPT_DIR"/dbca.rsp.mustache >"$TEMP_DIR"/dbca.rsp
+su - oracle -c "dbca -silent -createDatabase -responseFile $TEMP_DIR/dbca.rsp"
