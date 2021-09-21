@@ -51,7 +51,7 @@ esac
 echo oracle:"$ORACLE_PASSWORD" | chpasswd
 
 # Install database
-/usr/local/bin/mo "$script_dir"/db_install.rsp.mo >"$script_dir"/db_install.rsp
+/usr/local/bin/mo "$script_dir"/db_install.rsp.mustache >"$script_dir"/db_install.rsp
 su - oracle -c "unzip -d $ORACLE_HOME $script_dir/LINUX.X64_193000_db_home.zip"
 set +e +o pipefail
 su - oracle -c "cd $ORACLE_HOME && ./runInstaller -silent \
@@ -65,7 +65,7 @@ su - oracle -c "netca -silent -responseFile \
   $ORACLE_HOME/assistants/netca/netca.rsp"
 
 # Create database
-/usr/local/bin/mo "$script_dir"/dbca.rsp.mo >"$script_dir"/dbca.rsp
+/usr/local/bin/mo "$script_dir"/dbca.rsp.mustache >"$script_dir"/dbca.rsp
 su - oracle -c "dbca -silent -createDatabase -responseFile $script_dir/dbca.rsp"
 
 # Shutdown database
