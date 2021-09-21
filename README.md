@@ -22,6 +22,7 @@ ORACLE_EDITION=EE
 ORACLE_HOME=/u01/app/oracle/product/19.3.0/dbhome_1
 ORACLE_PASSWORD=oracle
 ORACLE_PDB=pdb1
+ORACLE_SAMPLESCHEMA=TRUE
 ORACLE_SID=orcl
 ```
 
@@ -60,11 +61,12 @@ sqlplus system/oracle
 SHOW CON_NAME
 ```
 
-Connect to PDB and browse to the sample table.
+Connect to PDB and confirm the connection. If you have sample schemas installed, browse to the sample table.
 
 ```console
 sqlplus system/oracle@localhost/pdb1
 SHOW CON_NAME
+-- If you have sample schemas installed
 SELECT JSON_OBJECT(*) FROM hr.employees WHERE rownum <= 3;
 ```
 
