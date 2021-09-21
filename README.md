@@ -25,37 +25,6 @@ ORACLE_PDB=pdb1
 ORACLE_SID=orcl
 ```
 
-Vagrant設定
------------
-
-プロキシを利用する必要がある場合、まずvagrant-proxyconfをインストールし、vagrant-proxyconf用の環境変数を設定しておく。
-
-### ホストがmacOS or Linuxの場合 ###
-
-```console
-export http_proxy=http://proxy.example.com:80
-export https_proxy=http://proxy.example.com:80
-vagrant plugin install vagrant-proxyconf
-
-export VAGRANT_HTTP_PROXY=http://proxy.example.com:80
-export VAGRANT_HTTPS_PROXY=http://proxy.example.com:80
-export VAGRANT_FTP_PROXY=http://proxy.example.com:80
-export VAGRANT_NO_PROXY=localhost,127.0.0.1
-```
-
-### ホストがWindowsの場合 ###
-
-```console
-SET http_proxy=http://proxy.example.com:80
-SET https_proxy=http://proxy.example.com:80
-vagrant plugin install vagrant-proxyconf
-
-SET VAGRANT_HTTP_PROXY=http://proxy.example.com:80
-SET VAGRANT_HTTPS_PROXY=http://proxy.example.com:80
-SET VAGRANT_FTP_PROXY=http://proxy.example.com:80
-SET VAGRANT_NO_PROXY=localhost,127.0.0.1
-```
-
 セットアップ
 ------------
 
