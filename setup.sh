@@ -78,3 +78,5 @@ su - oracle -c "netca -silent -responseFile $ORACLE_HOME/assistants/netca/netca.
 # Create a database
 /usr/local/bin/mo "$SCRIPT_DIR"/dbca.rsp.mustache >"$TEMP_DIR"/dbca.rsp
 su - oracle -c "dbca -silent -createDatabase -responseFile $TEMP_DIR/dbca.rsp"
+
+rm -rf "$TEMP_DIR"
