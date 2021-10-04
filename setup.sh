@@ -58,13 +58,15 @@ TEMP_DIR=$(mktemp -d)
 readonly TEMP_DIR
 chmod 755 "$TEMP_DIR"
 
+# Unzip downloaded file
+su - oracle -c "unzip -d $ORACLE_HOME $FILE"
+
 # Install Mo (https://github.com/tests-always-included/mo)
 curl -sSL https://git.io/get-mo -o /usr/local/bin/mo
 chmod +x /usr/local/bin/mo
 
 # Install Oracle Database
 /usr/local/bin/mo "$SCRIPT_DIR"/db_install.rsp.mustache >"$TEMP_DIR"/db_install.rsp
-su - oracle -c "unzip -d $ORACLE_HOME $FILE"
 set +e +o pipefail
 su - oracle -c "cd $ORACLE_HOME && ./runInstaller -silent \
   -ignorePrereq -waitforcompletion -responseFile $TEMP_DIR/db_install.rsp"

@@ -36,6 +36,7 @@ When you run `vagrant up`, the following will work internally.
 * Create directories
 * Set environment variables
 * Set password for oracle user
+* Unzip downloaded file
 * Install Oracle Database
 * Create a listener
 * Create a database
