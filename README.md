@@ -6,7 +6,7 @@ Vagrant + Oracle Linux 7 + Oracle Database 19c (19.3) | Simple setup of a single
 Download
 --------
 
-Download Oracle Database 19c (19.3) software from [Oracle Database Software Downloads](https://www.oracle.com/database/technologies/oracle-database-software-downloads.html). Then place downloaded file in the same directory as the Vagrantfile.
+Download Oracle Database 19c for Linux x86-64 software from [Oracle Database Software Downloads](https://www.oracle.com/database/technologies/oracle-database-software-downloads.html#db_ee). Then place downloaded file in the same directory as the Vagrantfile.
 
 * LINUX.X64_193000_db_home.zip
 
